@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Cli", "TicTacToe.Cli\TicTacToe.Cli.csproj", "{4A58D8F5-5F39-4C7F-B04E-ED098054846D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{567F45AD-8F87-4A52-979F-22F03EDBA083}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567F45AD-8F87-4A52-979F-22F03EDBA083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{567F45AD-8F87-4A52-979F-22F03EDBA083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A58D8F5-5F39-4C7F-B04E-ED098054846D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A58D8F5-5F39-4C7F-B04E-ED098054846D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A58D8F5-5F39-4C7F-B04E-ED098054846D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A58D8F5-5F39-4C7F-B04E-ED098054846D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

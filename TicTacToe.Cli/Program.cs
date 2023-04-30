@@ -11,9 +11,9 @@ namespace TicTacToe.Cli
 
             System.Console.WriteLine("TicTacToe!");
 
-            while (game.IsNotOver())
+            while (!game.is_over)
             {
-                System.Console.WriteLine(game.PrintBoard());
+                game.PrintBoard();
                 game.Play();
             }
 

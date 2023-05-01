@@ -11,13 +11,13 @@ namespace TicTacToe.Cli
 
             System.Console.WriteLine("TicTacToe!");
 
-            while (!game.is_over)
+            while (game.result == GameResult.OnGoing)
             {
                 game.PrintBoard();
                 game.Play();
             }
-
-            System.Console.WriteLine($"Finished !!! \n Result: {game.Result()}");
+            game.PrintBoard();
+            System.Console.WriteLine($"Finished !!! \n Result: {game.ResultStr()}");
             System.Console.ReadLine();
         }
     }

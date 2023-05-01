@@ -56,11 +56,11 @@ namespace TicTacToe.Tests
         }
 
         [Test]
-        public void at_start_game_is_not_over()
+        public void at_start_game_is_on_going()
         {
             var game = new TestableGameBuilder().Build();
 
-            Assert.IsFalse(game.is_over);
+            Assert.AreEqual(GameResult.OnGoing, game.result);
         }
 
         [Test]
@@ -143,6 +143,54 @@ namespace TicTacToe.Tests
             Assert.AreEqual((int)Player.O, game.board[1]);
             Assert.AreEqual(Player.X, game.player);
 
+        }
+
+        [Test]
+        public void can_detect_player_has_won()
+        {
+
+            List<int[]> winning_pos = new List<int[]>();
+            winning_pos.Add(new int[] { 1, 2, 3 });
+            winning_pos.Add(new int[] { 4, 5, 6 });
+            winning_pos.Add(new int[] { 7, 8, 9 });
+            winning_pos.Add(new int[] { 1, 4, 7 });
+            winning_pos.Add(new int[] { 2, 5, 8 });
+            winning_pos.Add(new int[] { 3, 6, 9 });
+            winning_pos.Add(new int[] { 1, 5, 9 });
+            winning_pos.Add(new int[] { 3, 5, 7 });
+
+            foreach (var pos in winning_pos)
+            {
+                var game = new TestableGameBuilder()
+                                .Set_X_positions(pos)
+                                .Build();
+
+                game.UpdateResult();
+
+                Assert.AreEqual(GameResult.PlayerX_won, game.result);
+            }
+
+            foreach (var pos in winning_pos)
+            {
+                var game = new TestableGameBuilder()
+                                .Set_O_positions(pos)
+                                .Build();
+                game.UpdateResult();
+                Assert.AreEqual(GameResult.PlayerO_won, game.result);
+            }
+        }
+
+        [Test]
+        public void can_detect_when_draw()
+        {
+            var game = new TestableGameBuilder()
+                                    .Set_O_positions(new int[] { 2, 3, 4, 5, 9 })
+                                    .Set_X_positions(new int[] { 1, 6, 7, 8 })
+                                    .Build();
+
+
+            game.UpdateResult();
+            Assert.AreEqual(GameResult.Draw, game.result);
         }
 
 

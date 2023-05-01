@@ -15,12 +15,6 @@ namespace TicTacToe.Tests
             game = new TestableGame(input);
         }
 
-        public TestableGameBuilder SetBoard(int[] board)
-        {
-            game.SetBoard(board);
-            return this;
-        }
-
         public Game Build()
         {
             return game;
@@ -68,9 +62,8 @@ namespace TicTacToe.Tests
         {
             var game = new TestableGameBuilder().Build();
 
-            var clear_board = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var clear_board = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             Assert.AreEqual(clear_board, game.board);
-            Assert.AreEqual(clear_board, game.free_cell);
         }
 
         [Test]
@@ -93,7 +86,7 @@ namespace TicTacToe.Tests
         }
 
         [Test]
-        public void prompt_choice_will_player_select_a_free_cell()
+        public void prompt_choice_while_player_select_a_free_cell()
         {
             var game = new TestableGameBuilder()
                                     .Set_O_positions(new int[] { 1, 3, 4 })
@@ -135,12 +128,12 @@ namespace TicTacToe.Tests
                                     .Build();
             // X play
             game.Play();
-            Assert.AreEqual((int)Player.X, game.board[0]);
+            Assert.AreEqual((int)Player.X, game.board[1]);
             Assert.AreEqual(Player.O, game.player);
 
             // O play
             game.Play();
-            Assert.AreEqual((int)Player.O, game.board[1]);
+            Assert.AreEqual((int)Player.O, game.board[2]);
             Assert.AreEqual(Player.X, game.player);
 
         }
@@ -188,15 +181,8 @@ namespace TicTacToe.Tests
                                     .Set_X_positions(new int[] { 1, 6, 7, 8 })
                                     .Build();
 
-
             game.UpdateResult();
             Assert.AreEqual(GameResult.Draw, game.result);
         }
-
-
-
-
-
-
     }
 }

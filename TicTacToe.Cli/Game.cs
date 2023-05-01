@@ -1,58 +1,63 @@
 namespace TicTacToe.Cli
 {
 
-    public enum Player
-    {
-        O = 0,
-        X = 10
-    }
 
-    public enum GameResult
-    {
-        PlayerX_won,
-        PlayerO_won,
-        Draw,
-        OnGoing
-    }
 
     public class Game
     {
         private Input input;
 
-        public Player player { get; set; }
-        public GameResult result { get; set; }
+        public Player player
+        {
+            get { return state.player; }
+        }
+        public GameResult result
+        {
+            get { return state.result; }
+        }
 
-        public int[] board = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        public int[] free_cell = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        public int[] board
+        {
+            get { return state.board; }
+        }
+
+        private State state = new State()
+        {
+            player = Player.X,
+
+            result = GameResult.OnGoing,
+
+            // insert 0 to align index and position 
+            board = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+        };
+
 
         public Game(Input input_)
         {
             input = input_;
-            player = Player.X;
-            result = GameResult.OnGoing;
         }
-
-
 
         public void Play()
         {
             int pos = PromptNextPlayedPosition();
-            board[pos - 1] = (int)player;
+            state.board[pos] = (int)player;
             UpdateResult();
             NextPlayer();
         }
 
         private void NextPlayer()
         {
-            if (player == Player.O) player = Player.X;
-            else player = Player.O;
+            if (player == Player.O)
+                state.player = Player.X;
+            else
+                state.player = Player.O;
         }
 
         public void PrintBoard()
         {
             string line_sep = "+---+---+---+\n";
             string grid = line_sep;
-            int index = 0;
+            int index = 1;
             for (int line = 0; line < 3; line++)
             {
                 grid += "|";
@@ -91,13 +96,13 @@ namespace TicTacToe.Cli
 
         public bool is_free_cell(int pos)
         {
-            return board[pos - 1] == pos;
+            return state.board[pos] == pos;
         }
 
         public int PromptNextPlayedPosition()
         {
 
-            while (true) //  add a limit try number  a player loose
+            while (true) // TODO  add a limit try number  a player loose
             {
                 input.Write($"{player} select position to play: ");
                 int ret = 0;
@@ -116,8 +121,6 @@ namespace TicTacToe.Cli
                     return ret;
                 }
             }
-
-
         }
 
         private bool IsValidPosition(int position)
@@ -144,17 +147,17 @@ namespace TicTacToe.Cli
                 int sum = 0;
                 foreach (int index in pos)
                 {
-                    sum += board[index - 1];
+                    sum += board[index];
                 }
 
                 if (sum == 0)
                 {
-                    result = GameResult.PlayerO_won;
+                    state.result = GameResult.PlayerO_won;
                     return;
                 }
                 if (sum == 30)
                 {
-                    result = GameResult.PlayerX_won;
+                    state.result = GameResult.PlayerX_won;
                     return;
                 }
             }
@@ -168,7 +171,7 @@ namespace TicTacToe.Cli
                 }
             }
 
-            result = GameResult.Draw;
+            state.result = GameResult.Draw;
 
         }
 

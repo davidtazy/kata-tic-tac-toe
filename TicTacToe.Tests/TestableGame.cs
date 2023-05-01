@@ -12,11 +12,6 @@ namespace TicTacToe.Tests
             testableInput = input_;
         }
 
-        public void SetBoard(int[] b)
-        {
-            base.board = board;
-        }
-
         internal void SetPlayersInput(string[] inputs)
         {
             testableInput.SetPlayersInput(inputs);
@@ -26,7 +21,7 @@ namespace TicTacToe.Tests
         {
             foreach (int pos in positions)
             {
-                base.board[pos - 1] = (int)Player.O;
+                base.board[pos] = (int)Player.O;
             }
         }
 
@@ -34,7 +29,7 @@ namespace TicTacToe.Tests
         {
             foreach (int pos in positions)
             {
-                base.board[pos - 1] = (int)Player.X;
+                base.board[pos] = (int)Player.X;
             }
         }
 
